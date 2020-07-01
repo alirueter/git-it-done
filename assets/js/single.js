@@ -8,6 +8,17 @@ var getRepoName = function() {
     var repoName = queryString.split("=")[1];
     getRepoIssues(repoName);
     repoNameEl.textContent = repoName;
+
+    //check for valid values before passing them into their respective function calls
+    if (repoName) {
+        //only displays repo name and make fetch call if the value for repoName exists
+        repoName.textContent = repoName;
+        getRepoIssues(repoName);
+    }
+    else {
+        //otherwise, redirect user back to homepage to try again
+        document.location.replace("./index.html");
+    }
 };
 
 var getRepoIssues = function(repo) {
@@ -27,7 +38,8 @@ var getRepoIssues = function(repo) {
             });
         }
         else {
-            alert("There was a problem with your request!");
+            //if not successful, redirect user to homepage
+            document.location.replace("./index.html");
         }
     });
 };
